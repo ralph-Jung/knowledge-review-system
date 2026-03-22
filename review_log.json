@@ -14,5 +14,61 @@
     "next_review": "2026-03-22",
     "last_quality": null,
     "history": []
+  },
+  "knowledge/운영체제-프로세스와-IPC.md": {
+    "easiness_factor": 2.5,
+    "interval_days": 0,
+    "repetition_count": 0,
+    "next_review": "2026-03-22",
+    "last_quality": null,
+    "history": []
+  },
+  "knowledge/네트워크-데이터링크계층.md": {
+    "easiness_factor": 2.5,
+    "interval_days": 0,
+    "repetition_count": 0,
+    "next_review": "2026-03-22",
+    "last_quality": null,
+    "history": []
+  },
+  "knowledge/운영체제-서론.md": {
+    "easiness_factor": 2.5,
+    "interval_days": 0,
+    "repetition_count": 0,
+    "next_review": "2026-03-22",
+    "last_quality": null,
+    "history": []
+  },
+  "knowledge/smtp-프로토콜-메일-보내는-방법.md": {
+    "easiness_factor": 2.5,
+    "interval_days": 0,
+    "repetition_count": 0,
+    "next_review": "2026-03-22",
+    "last_quality": null,
+    "history": []
+  },
+  "knowledge/네트워크-물리계층.md": {
+    "easiness_factor": 2.5,
+    "interval_days": 0,
+    "repetition_count": 0,
+    "next_review": "2026-03-22",
+    "last_quality": null,
+    "history": []
+  },
+  "knowledge/운영체제-스레드와-병행성.md": {
+    "easiness_factor": 2.5,
+    "interval_days": 0,
+    "repetition_count": 0,
+    "next_review": "2026-03-22",
+    "last_quality": null,
+    "history": []
+  },
+  "knowledge/운영체제-구조.md": {
+    "easiness_factor": 2.5,
+    "interval_days": 0,
+    "repetition_count": 0,
+    "next_review": "2026-03-22",
+    "last_quality": null,
+    "history": []
   }
 }

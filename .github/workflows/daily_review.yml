@@ -28,6 +28,9 @@ jobs:
         env:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
 
+      - name: Register new knowledge files in review system
+        run: python register_all_knowledge.py
+
       - name: Send review email
         run: python cli.py send-review
         env:
