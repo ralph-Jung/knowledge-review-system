@@ -1,0 +1,47 @@
+name: Daily Knowledge Review
+
+on:
+  schedule:
+    - cron: '0 23 * * *'   # 08:00 KST (UTC+9)
+    - cron: '0 4 * * *'    # 13:00 KST (UTC+9)
+    - cron: '0 11 * * *'   # 20:00 KST (UTC+9)
+  workflow_dispatch:        # Manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Sync CS knowledge from Notion
+        run: python core/notion_sync.py
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+
+      - name: Send review email
+        run: python cli.py send-review
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+
+      - name: Commit updated files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add knowledge/ review_log.json
+          git diff --staged --quiet || git commit -m "Update knowledge and review state [skip ci]"
+          git push

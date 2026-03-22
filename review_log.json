@@ -1,0 +1,18 @@
+{
+  "knowledge/tmux.md": {
+    "easiness_factor": 2.5,
+    "interval_days": 0,
+    "repetition_count": 0,
+    "next_review": "2026-03-22",
+    "last_quality": null,
+    "history": []
+  },
+  "knowledge/https-와-http-차이.md": {
+    "easiness_factor": 2.5,
+    "interval_days": 0,
+    "repetition_count": 0,
+    "next_review": "2026-03-22",
+    "last_quality": null,
+    "history": []
+  }
+}
