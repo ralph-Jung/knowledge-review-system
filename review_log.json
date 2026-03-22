@@ -70,5 +70,109 @@
     "next_review": "2026-03-22",
     "last_quality": null,
     "history": []
+  },
+  "knowledge/1-물리-계층의-기술.md": {
+    "easiness_factor": 2.5,
+    "interval_days": 0,
+    "repetition_count": 0,
+    "next_review": "2026-03-22",
+    "last_quality": null,
+    "history": []
+  },
+  "knowledge/1-서론.md": {
+    "easiness_factor": 2.5,
+    "interval_days": 0,
+    "repetition_count": 0,
+    "next_review": "2026-03-22",
+    "last_quality": null,
+    "history": []
+  },
+  "knowledge/4-스레드와-병행성.md": {
+    "easiness_factor": 2.5,
+    "interval_days": 0,
+    "repetition_count": 0,
+    "next_review": "2026-03-22",
+    "last_quality": null,
+    "history": []
+  },
+  "knowledge/운영체제-관련-책.md": {
+    "easiness_factor": 2.5,
+    "interval_days": 0,
+    "repetition_count": 0,
+    "next_review": "2026-03-22",
+    "last_quality": null,
+    "history": []
+  },
+  "knowledge/데모데이-부스-운영-방안.md": {
+    "easiness_factor": 2.5,
+    "interval_days": 0,
+    "repetition_count": 0,
+    "next_review": "2026-03-22",
+    "last_quality": null,
+    "history": []
+  },
+  "knowledge/3.md": {
+    "easiness_factor": 2.5,
+    "interval_days": 0,
+    "repetition_count": 0,
+    "next_review": "2026-03-22",
+    "last_quality": null,
+    "history": []
+  },
+  "knowledge/2-데이터-링크-계층의-기술.md": {
+    "easiness_factor": 2.5,
+    "interval_days": 0,
+    "repetition_count": 0,
+    "next_review": "2026-03-22",
+    "last_quality": null,
+    "history": []
+  },
+  "knowledge/3주차-ch11-css-in-js.md": {
+    "easiness_factor": 2.5,
+    "interval_days": 0,
+    "repetition_count": 0,
+    "next_review": "2026-03-22",
+    "last_quality": null,
+    "history": []
+  },
+  "knowledge/네트워크.md": {
+    "easiness_factor": 2.5,
+    "interval_days": 0,
+    "repetition_count": 0,
+    "next_review": "2026-03-22",
+    "last_quality": null,
+    "history": []
+  },
+  "knowledge/운영체제.md": {
+    "easiness_factor": 2.5,
+    "interval_days": 0,
+    "repetition_count": 0,
+    "next_review": "2026-03-22",
+    "last_quality": null,
+    "history": []
+  },
+  "knowledge/a-survey-on-federated-learning-the-journey-from-centralized-to-distributed-on-site-learning-and-beyond.md": {
+    "easiness_factor": 2.5,
+    "interval_days": 0,
+    "repetition_count": 0,
+    "next_review": "2026-03-22",
+    "last_quality": null,
+    "history": []
+  },
+  "knowledge/2-운영체제-구조.md": {
+    "easiness_factor": 2.5,
+    "interval_days": 0,
+    "repetition_count": 0,
+    "next_review": "2026-03-22",
+    "last_quality": null,
+    "history": []
+  },
+  "knowledge/cs-지식.md": {
+    "easiness_factor": 2.5,
+    "interval_days": 0,
+    "repetition_count": 0,
+    "next_review": "2026-03-22",
+    "last_quality": null,
+    "history": []
   }
 }
