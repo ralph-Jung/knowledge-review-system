@@ -8,7 +8,7 @@
 - 🔄 **Notion 동기화**: Notion 데이터베이스와 양방향 동기화
 - 🧮 **간격 반복 알고리즘**: SM-2 알고리즘 기반 최적화된 복습 스케줄링
 - 📧 **이메일 알림**: 매일 복습할 내용을 자동으로 이메일 발송
-- 🤖 **AI 문제 생성**: OpenAI API를 활용한 자동 문제 생성
+- 🤖 **AI 문제 생성**: Gemini API를 활용한 자동 문제 생성
 - 📊 **복습 통계**: 학습 진도 및 성과 추적
 
 ## 🚀 빠른 시작
@@ -28,7 +28,7 @@ pip install -r requirements.txt
 ```env
 NOTION_API_KEY=your_notion_api_key
 NOTION_DATABASE_ID=your_database_id
-OPENAI_API_KEY=your_openai_api_key
+GEMINI_API_KEY=your_gemini_api_key
 EMAIL_HOST=smtp.gmail.com
 EMAIL_PORT=587
 EMAIL_USER=your_email@gmail.com
@@ -103,7 +103,7 @@ knowledge-review-system/
 - 자동 메타데이터 업데이트
 
 ### AI 문제 생성
-- OpenAI API를 활용한 맞춤형 문제 생성
+- Gemini API를 활용한 맞춤형 문제 생성
 - 지식의 복잡도에 따른 문제 난이도 조절
 - 다양한 문제 유형 지원
 
