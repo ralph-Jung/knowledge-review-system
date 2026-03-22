@@ -136,19 +136,24 @@ class NotionSync:
 
         return index
 
-    def should_process_page(self, page: Dict, local_index: Dict[str, Dict]) -> bool:
-        """Determine if a page should be processed (new or updated)."""
-        page_id = page["id"]
-        last_edited = page["last_edited_time"]
+    def should_process_page(self, page: Dict, local_index: Dict[str, Dict], target_filename: str) -> bool:
+        """Determine if a page should be processed (new or updated based on filename and timestamp)."""
+        page_last_edited = page["last_edited_time"]
 
-        if page_id not in local_index:
-            return True  # New page
+        # Check if file with same name exists
+        target_filepath = f"knowledge/{target_filename}"
 
-        local_last_edited = local_index[page_id].get('last_edited_time')
-        if not local_last_edited or last_edited > local_last_edited:
-            return True  # Updated page
+        # Find any existing file with the same target filename
+        for notion_id, file_info in local_index.items():
+            existing_filepath = file_info.get('filepath', '')
+            if existing_filepath.endswith(target_filename):
+                # File with same name exists, check if newer
+                local_last_edited = file_info.get('last_edited_time')
+                if not local_last_edited or page_last_edited > local_last_edited:
+                    return True  # Page is newer, should update
+                return False  # Local file is up to date
 
-        return False  # Unchanged
+        return True  # New file
 
     def generate_confusion_points(self, title: str, content: str) -> List[str]:
         """Generate confusion points based on topic."""
@@ -277,28 +282,77 @@ def main():
     local_index = sync.build_local_index(knowledge_dir)
     print(f"   Found {len(local_index)} existing files")
 
-    # Search for CS-related pages
-    search_queries = ["CS", "운영체제", "네트워크", "SMTP"]
+    # Find CS 지식 page first
+    print("🔍 Finding CS 지식 main page...")
+    cs_pages = sync.search_pages("CS 지식")
+    cs_main_page = None
+
+    for page in cs_pages:
+        title_prop = page.get("properties", {}).get("title", {})
+        if title_prop.get("title"):
+            title = title_prop["title"][0]["plain_text"]
+            if title == "CS 지식":
+                cs_main_page = page
+                break
+
+    if not cs_main_page:
+        print("❌ CS 지식 page not found!")
+        return
+
+    print(f"✅ Found CS 지식 page: {cs_main_page['id']}")
+
+    # Get child pages of CS 지식
+    print("📚 Getting CS knowledge child pages...")
+    cs_content = sync.get_page_content(cs_main_page["id"])
     all_pages = []
 
-    for query in search_queries:
-        print(f"🔍 Searching for: {query}")
-        pages = sync.search_pages(query)
-        all_pages.extend(pages)
-        print(f"   Found {len(pages)} pages")
+    # Process CS main page child pages
+    for block in cs_content["blocks"]:
+        if block.get("type") == "child_page":
+            child_page_id = block["id"]
+            try:
+                # Get child page metadata
+                child_page_url = f"{sync.base_url}/pages/{child_page_id}"
+                child_response = requests.get(child_page_url, headers=sync.headers)
+                child_response.raise_for_status()
+                child_page = child_response.json()
+                all_pages.append(child_page)
 
-    # Remove duplicates
-    unique_pages = {}
-    for page in all_pages:
-        unique_pages[page["id"]] = page
-    all_pages = list(unique_pages.values())
+                # Get child page's children too (for nested structure)
+                child_content = sync.get_page_content(child_page_id)
+                for sub_block in child_content["blocks"]:
+                    if sub_block.get("type") == "child_page":
+                        try:
+                            sub_page_id = sub_block["id"]
+                            sub_page_url = f"{sync.base_url}/pages/{sub_page_id}"
+                            sub_response = requests.get(sub_page_url, headers=sync.headers)
+                            sub_response.raise_for_status()
+                            sub_page = sub_response.json()
+                            all_pages.append(sub_page)
+                        except Exception as e:
+                            print(f"⚠️  Error getting sub-page {sub_block['id']}: {e}")
+
+            except Exception as e:
+                print(f"⚠️  Error getting child page {child_page_id}: {e}")
 
     print(f"📄 Total unique pages: {len(all_pages)}")
 
     # Process pages that need updating
     processed = 0
     for page in all_pages:
-        if sync.should_process_page(page, local_index):
+        # Extract title to generate target filename
+        title = ""
+        if "properties" in page and "title" in page["properties"]:
+            title_prop = page["properties"]["title"]
+            if title_prop.get("title"):
+                title = sync.extract_text_from_rich_text(title_prop["title"])
+
+        if not title:
+            title = "Untitled"
+
+        target_filename = sync.slugify(title) + '.md'
+
+        if sync.should_process_page(page, local_index, target_filename):
             try:
                 print(f"⚙️  Processing: {page.get('properties', {}).get('title', {}).get('title', [{}])[0].get('plain_text', page['id'])}")
 
