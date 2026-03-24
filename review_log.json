@@ -70,5 +70,21 @@
     "next_review": "2026-03-22",
     "last_quality": null,
     "history": []
+  },
+  "knowledge/운영체제-1.md": {
+    "easiness_factor": 2.5,
+    "interval_days": 0,
+    "repetition_count": 0,
+    "next_review": "2026-03-24",
+    "last_quality": null,
+    "history": []
+  },
+  "knowledge/네트워크-1.md": {
+    "easiness_factor": 2.5,
+    "interval_days": 0,
+    "repetition_count": 0,
+    "next_review": "2026-03-24",
+    "last_quality": null,
+    "history": []
   }
 }
